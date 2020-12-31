@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="h1">Login</div>
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        {% for fm in form %}
+        <div>
+            {{fm.label_tag}} {{fm}}  <small>{{fm.errors|striptags}}</small> 
+        </div>
+        {% endfor %}
+        <input type="submit" value="Login">
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p>{{error}}</p>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div>
+{% endblock content %}
