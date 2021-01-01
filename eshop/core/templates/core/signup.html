@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Signup{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="h1">Signup</div>
+    <form method="POST">
+        {% csrf_token %}
+        {% for fm in user_form %}
+        <div>
+            {{fm.label_tag}} {{fm}}  <small>{{fm.errors|striptags}}</small> 
+        </div>
+        {% endfor %}
+        {% for fm in profile_form %}
+        <div>
+            {{fm.label_tag}} {{fm}}  <small>{{fm.errors|striptags}}</small> 
+        </div>
+        {% endfor %}
+        <input type="submit" value="Signup">
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p>{{error}}</p>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div>
+{% endblock content %}
