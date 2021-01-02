@@ -1,11 +1,13 @@
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
+from django.views.generic.list import ListView
 from django.views import View
 from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth.models import User,Group
 from django.contrib.auth import authenticate,login
 from .forms import LoginForm,ProfileForm,SignUpForm
 from .models import Profile
+from product.models import Product
 
 # Create your views here.
 
@@ -18,8 +20,13 @@ class HomeView(TemplateView):
         context['home_disabled']='disabled'
         return context
 
-class DashboardView(TemplateView):
+class DashboardView(ListView):
+    model=Product
     template_name='core/dashboard.html'
+    context_object_name='products'
+    
+    def get_queryset(self):
+        return Product.objects.filter(seller=self.request.user)
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)

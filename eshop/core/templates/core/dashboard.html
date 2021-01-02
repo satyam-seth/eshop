@@ -2,5 +2,9 @@
 {% block title %}Dashboard{% endblock title %}
 {% block content %}
     <div class="h1">Dashboard</div>
-    <a href="{% url 'add' %}">Add Product</a>
+    <a href="{% url 'add' %}">Add Product</a><hr>
+    {% for product in products %}
+        {{product.id}} {{product.title}} {{product.date}} {{product.description}} {{product.mrp}} {{product.selling_price}}
+        <hr>
+    {% endfor %}
 {% endblock content %}
