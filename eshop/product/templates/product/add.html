@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Add Product{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="h1">Add Product</div>
+    <form method="POST">
+        {% csrf_token %}
+        {% for fm in form %}
+        <div>
+            {{fm.label_tag}} {{fm}}  <small>{{fm.errors|striptags}}</small> 
+        </div>
+        {% endfor %}
+        <input type="submit" value="Post">
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p>{{error}}</p>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div>
+{% endblock content %}

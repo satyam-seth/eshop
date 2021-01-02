@@ -23,6 +23,7 @@ class SignUpForm(UserCreationForm):
         labels={'email':'Email'}
 
 class ProfileForm(forms.ModelForm):
+    account_type=forms.ChoiceField(choices=(('customer','customer'),('seller','seller')))
     class Meta:
         model=Profile
         fields=['phone','city']

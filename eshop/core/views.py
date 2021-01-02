@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
 from django.views import View
 from django.contrib.auth.views import LoginView,LogoutView
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.contrib.auth import authenticate,login
 from .forms import LoginForm,ProfileForm,SignUpForm
 from .models import Profile
@@ -16,6 +16,15 @@ class HomeView(TemplateView):
         context=super().get_context_data(**kwargs)
         context['home_active']='active'
         context['home_disabled']='disabled'
+        return context
+
+class DashboardView(TemplateView):
+    template_name='core/dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['dashoard_active']='active'
+        context['dashoard_disabled']='disabled'
         return context
 
 class UserLoginView(LoginView):
@@ -54,11 +63,14 @@ class UserSignUpView(View):
             password=user_form.cleaned_data['password1']
             phone=profile_form.cleaned_data['phone']
             city=profile_form.cleaned_data['city']
+            account_type=profile_form.cleaned_data['account_type']
             newuser=User.objects.create_user(username=username,first_name=first_name,last_name=last_name,email=email,password=password)
             newuser.save()
+            group=Group.objects.get(name=account_type)
+            newuser.groups.add(group)
             profile=Profile.objects.create(user=newuser,phone=phone,city=city)
             profile.save()
             user=authenticate(username=username,password=password)
             if user is not None:
                 login(request,user)
-            return redirect('home')
+        return redirect('home')

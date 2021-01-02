@@ -13,14 +13,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
-
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         attrs_needed = ['_phone', '_city']
-#         if all(hasattr(instance, attr) for attr in attrs_needed):
-#             Profile.objects.create(user=instance,phone=instance._phone,city=instance._city)
-
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
