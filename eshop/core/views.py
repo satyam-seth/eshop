@@ -57,7 +57,13 @@ class UserSignUpView(View):
     def get(self,request):
         user_form=SignUpForm()
         profile_form=ProfileForm()
-        return render(request,'core/signup.html',{'user_form':user_form,'profile_form':profile_form})
+        context={
+            'user_form':user_form,
+            'profile_form':profile_form,
+            'signup_active':'active',
+            'signup_disabled':'disabled',
+            }
+        return render(request,'core/signup.html',context)
     
     def post(self,request):
         user_form=SignUpForm(request.POST)

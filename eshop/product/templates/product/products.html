@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Products{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="h1">Products</div>
+    {% for product in products %}
+        {{product.id}} {{product.title}} {{product.date}} {{product.description}} {{product.mrp}} {{product.selling_price}}
+        <hr>
+    {% endfor %}
+</div>
+{% endblock content %}

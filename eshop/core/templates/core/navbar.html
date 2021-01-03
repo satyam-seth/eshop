@@ -15,9 +15,15 @@
                 <li class="nav-item">
                     <a class="nav-link {{logout_active}} {{logout_disabled}}" href="{% url 'logout' %}">Logout</a>
                 </li>
+                {% if perms.product.add_product %}
                 <li class="nav-item">
                     <a class="nav-link {{dashboard_active}} {{dashboard_disabled}}" href="{% url 'dashboard' %}">Dashboard</a>
                 </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link {{products_active}} {{products_disabled}}" href="{% url 'products' %}">Products</a>
+                </li>
+                {% endif %}
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link {{login_active}} {{login_disabled}}" href="{% url 'login' %}">Login</a>
