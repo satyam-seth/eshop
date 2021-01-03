@@ -84,7 +84,7 @@ class UserSignUpView(View):
             newuser.save()
             group=Group.objects.get(name=account_type)
             newuser.groups.add(group)
-            profile=Profile.objects.create(user=newuser,phone=phone,city=city)
+            profile=Profile.objects.create(user=newuser,phone=phone,city=city.lower())
             profile.save()
             user=authenticate(username=username,password=password)
             if user is not None:
