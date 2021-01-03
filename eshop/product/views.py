@@ -1,13 +1,14 @@
 from django.shortcuts import render,redirect
 from django.views import View
 from django.views.generic import ListView
-from django.contrib.auth.models import User
 from .forms import ProductForm
 from .models import Product
-from core.models import Profile
-
+from django.contrib.auth.models import Group
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required,user_passes_test
 # Create your views here.
 
+@method_decorator(user_passes_test(lambda u: Group.objects.get(name='seller') in u.groups.all()),name='dispatch')
 class AddProduct(View):
     def get(self,request):
         form=ProductForm()
@@ -25,8 +26,7 @@ class AddProduct(View):
             new_product.save()
             return redirect('dashboard')
 
-
-
+@method_decorator(login_required,name='dispatch')
 class ShowProduct(ListView):
     model=Product
     template_name='product/products.html'

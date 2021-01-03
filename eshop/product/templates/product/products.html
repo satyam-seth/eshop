@@ -3,11 +3,32 @@
 {% block title %}Products{% endblock title %}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="h1">Products</div>
-    {% for product in products %}
-        {{product.id}} {{product.title}} {{product.date}} {{product.description}} {{product.mrp}} {{product.selling_price}}
-        <hr>
-    {% endfor %}
+<div class="container-fluid p-5 products shadow-lg">
+    <div class="container text-light my-5">
+        <div>
+            <h1 class="display-4">Products</h1>
+        </div>
+        <div class="lead">
+            <p>available in your city.</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid p-4">
+    <div class="row justify-content-center">
+        {% for product in products %}    
+        <div class="card m-2 shadow" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{product.title}}</h5>
+                <p class="card-text">{{product.description}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">&#8377;<span class="text-decoration-line-through">{{product.mrp}} </span>{{product.selling_price}}/-</li>
+                <li class="list-group-item text-muted">{{product.date}}</li>
+              </ul>
+            <a href="#" class="btn btn-primary mb-3">Buy</a>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}

@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate,login
 from .forms import LoginForm,ProfileForm,SignUpForm
 from .models import Profile
 from product.models import Product
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
 
@@ -20,6 +22,7 @@ class HomeView(TemplateView):
         context['home_disabled']='disabled'
         return context
 
+@method_decorator(user_passes_test(lambda u: Group.objects.get(name='seller') in u.groups.all()),name='dispatch')
 class DashboardView(ListView):
     model=Product
     template_name='core/dashboard.html'

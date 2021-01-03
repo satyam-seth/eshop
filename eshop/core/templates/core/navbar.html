@@ -12,25 +12,24 @@
                     <a class="nav-link {{home_active}} {{home_disabled}}" aria-current="page" href="{% url 'home' %}">Home</a>
                 </li>
                 {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link {{logout_active}} {{logout_disabled}}" href="{% url 'logout' %}">Logout</a>
-                </li>
-                {% if perms.product.add_product %}
-                <li class="nav-item">
-                    <a class="nav-link {{dashboard_active}} {{dashboard_disabled}}" href="{% url 'dashboard' %}">Dashboard</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{products_active}} {{products_disabled}}" href="{% url 'products' %}">Products</a>
+                    </li>
+                    {% if perms.product.add_product %}
+                        <li class="nav-item">
+                            <a class="nav-link {{dashboard_active}} {{dashboard_disabled}}" href="{% url 'dashboard' %}">Dashboard</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link {{logout_active}} {{logout_disabled}}" href="{% url 'logout' %}">Logout</a>
+                    </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link {{products_active}} {{products_disabled}}" href="{% url 'products' %}">Products</a>
-                </li>
-                {% endif %}
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link {{login_active}} {{login_disabled}}" href="{% url 'login' %}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{signup_active}} {{signup_disabled}}" href="{% url 'signup' %}">SignUp</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{login_active}} {{login_disabled}}" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{signup_active}} {{signup_disabled}}" href="{% url 'signup' %}">SignUp</a>
+                    </li>
                 {% endif %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
