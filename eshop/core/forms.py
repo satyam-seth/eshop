@@ -6,11 +6,11 @@ from django.utils.translation import gettext_lazy as _
 from .models import Profile
 
 class LoginForm(AuthenticationForm):
-    username=UsernameField(widget=forms.TextInput(attrs={'autofocus':True}))
+    username=UsernameField(widget=forms.TextInput(attrs={'autofocus':True,'class':'form-control','placeholder':'enter your username'}))
     password = forms.CharField(
         label=_("Password"),
         strip=False,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password'}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password','class':'form-control','placeholder':'enter your password'}),
     )
 
 class SignUpForm(UserCreationForm):
