@@ -1,10 +1,62 @@
 {% extends 'core/base.html' %}
 {% block title %}Dashboard{% endblock title %}
 {% block content %}
-    <div class="h1">Dashboard</div>
-    <a href="{% url 'add' %}">Add Product</a><hr>
-    {% for product in products %}
-        {{product.id}} {{product.title}} {{product.date}} {{product.description}} {{product.mrp}} {{product.selling_price}}
-        <hr>
-    {% endfor %}
+<div class="container-fluid p-5 dashboard shadow-lg">
+    <div class="container my-5">
+        <div>
+            <h1 class="display-3">Dashboard</h1>
+        </div>
+        <div class="lead">
+            <p>Sell your product.</p>
+        </div>
+    </div>
+</div>
+<div class="container p-4 shadow-lg my-5 border rounded">
+    <h1 class="alert alert-secondary text-center mt-2 shadow-lg" style="font-size:3vw">Your Products</h1>
+    {% if products %}
+    <div class="table-responsive content-center-justify">
+        <table class="table table-hover table-striped border shadow">
+            <thead>
+                <tr>
+                    <th scope="col">S. No.</th>
+                    <th scope="col">Post Date</th>
+                    <th scope="col" class="d-none d-sm-block">Day</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product Description</th>
+                    <th scope="col">M.R.P.</th>
+                    <th scope="col">Price</th>
+                    <th scope="col" class="d-none d-sm-block">Product ID</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <th scope="row">{{forloop.counter }}</th>
+                    <td>{{product.date|date:"d M Y"}}</td>
+                    <td class="d-none d-sm-block">{{product.date|date:"D"}}</td>
+                    <td>{{product.title|capfirst}}</td>
+                    <td>{{product.description|capfirst}}</td>
+                    <td>{{product.mrp}}</td>
+                    <td>{{product.selling_price}}</td>
+                    <td class="d-none d-sm-block">{{product.id}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning shadow-sm" href="#">Edit</a>
+                        <a class="btn btn-sm btn-danger shadow-sm" href="#"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <h4 class="text-center alert alert-warning shadow" style="font-size:2.5vw">products not found</h4>
+    {% endif %}
+</div>
+<a href="{% url 'add' %}">Add Product</a>
+<hr>
+{% for product in products %}
+{{product.id}} {{product.title}} {{product.date}} {{product.description}} {{product.mrp}} {{product.selling_price}}
+<hr>
+{% endfor %}
 {% endblock content %}

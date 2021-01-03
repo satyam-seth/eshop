@@ -4,4 +4,11 @@
     background-size: cover;
     height: 100%;
     text-shadow: 2px 2px black;
-  }
+}
+.dashboard {
+    background-image: url("../images/dashboard.jpg");
+    background-color: dimgrey;
+    background-size: cover;
+    height: 100%;
+    text-shadow: 1px 1px white;
+}

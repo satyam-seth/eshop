@@ -18,13 +18,15 @@
         {% for product in products %}    
         <div class="card m-2 shadow" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">{{product.title}}</h5>
-                <p class="card-text">{{product.description}}</p>
+                <h5 class="card-title">{{product.title|capfirst}}</h5>
+                <p class="card-text">{{product.description|capfirst}}</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">&#8377;<span class="text-decoration-line-through">{{product.mrp}} </span>{{product.selling_price}}/-</li>
-                <li class="list-group-item text-muted">{{product.date}}</li>
+                <li class="list-group-item text-decoration-line-through">M.R.P.: &#8377;{{product.mrp}}/-</li>
+                <li class="list-group-item">Price: &#8377;{{product.selling_price}}/-</li>
+                <li class="list-group-item">Seller: {{product.seller.get_full_name|capfirst}}</li>
+                <li class="list-group-item text-muted">Publish Date: {{product.date|date:"d M Y"}}</li>
+                <li class="list-group-item text-muted">Location: {{product.location}}</li>
               </ul>
             <a href="#" class="btn btn-primary mb-3">Buy</a>
         </div>

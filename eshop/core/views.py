@@ -33,8 +33,8 @@ class DashboardView(ListView):
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
-        context['dashoard_active']='active'
-        context['dashoard_disabled']='disabled'
+        context['dashboard_active']='active'
+        context['dashboard_disabled']='disabled'
         return context
 
 class UserLoginView(LoginView):
