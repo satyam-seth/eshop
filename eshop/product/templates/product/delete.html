@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Delete Product{% endblock title %}
+
+{% block content %}
+<div class="container-fluid py-5 bg-warning">
+    <div class="row px-2 py-5">
+        <div class="col-md-10 offset-md-1 border rounded shadow-lg bg-info my-5 py-5">
+            <div class="h1 alert alert-secondary text-center m-3 shadow">Delete Product</div>
+            <form method="post" class="p-2">
+                {% csrf_token %}
+                <div class="d-grid gap-2 px-2">
+                    <input type="submit" value="Delete" class="btn btn-danger shadow">
+                    <a class="btn btn-success shadow" href="{% url 'dashboard' %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

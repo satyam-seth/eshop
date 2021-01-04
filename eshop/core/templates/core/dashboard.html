@@ -43,7 +43,7 @@
                         <td>{{product.id}}</td>
                         <td>
                             <a class="btn btn-sm btn-warning shadow-sm" href="{% url 'edit' product.id %}">Edit</a>
-                            <a class="btn btn-sm btn-danger shadow-sm" href="#"><i class="fas fa-trash-alt"></i></a>
+                            <a class="btn btn-sm btn-danger shadow-sm" href="{% url 'delete' product.id %}"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -51,7 +51,7 @@
             </table>
         </div>
         {% else %}
-        <h4 class="text-center alert alert-warning shadow" style="font-size:2.5vw">products not found</h4>
+        <div class="h3 text-center alert alert-warning shadow">products not found</div>
         {% endif %}
     </div>
 </div>

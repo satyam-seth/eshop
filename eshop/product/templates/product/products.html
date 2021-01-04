@@ -27,7 +27,7 @@
                 <li class="list-group-item">Price: &#8377;{{product.selling_price}}/-</li>
                 <li class="list-group-item">Seller: {{product.seller.get_full_name|capfirst}}</li>
                 <li class="list-group-item text-muted">Publish Date: {{product.date|date:"d M Y"}}</li>
-                <li class="list-group-item text-muted">Location: {{product.location}}</li>
+                <li class="list-group-item text-muted">Location: {{product.location|capfirst}}</li>
               </ul>
             <a href="#" class="btn btn-primary m-3">Buy</a>
         </div>

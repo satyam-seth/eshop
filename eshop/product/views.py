@@ -7,11 +7,11 @@ from .models import Product
 from django.contrib.auth.models import Group
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required,user_passes_test
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView,DeleteView
 # Create your views here.
 
 @method_decorator(login_required,name='dispatch')
-class ShowProductView(ListView):
+class ProductListView(ListView):
     model=Product
     template_name='product/products.html'
     context_object_name='products'
@@ -43,8 +43,14 @@ class AddProductView(View):
             return redirect('dashboard')
 
 @method_decorator(user_passes_test(lambda u: Group.objects.get(name='seller') in u.groups.all()),name='dispatch')
-class UpdateProductView(UpdateView):
+class ProductUpdateView(UpdateView):
     model=Product
     form_class=ProductForm
     template_name='product/edit.html'
+    success_url='/dashboard/'
+
+@method_decorator(user_passes_test(lambda u: Group.objects.get(name='seller') in u.groups.all()),name='dispatch')
+class ProductDeleteView(DeleteView):
+    model=Product
+    template_name='product/delete.html'
     success_url='/dashboard/'
