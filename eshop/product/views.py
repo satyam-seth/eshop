@@ -7,10 +7,26 @@ from .models import Product
 from django.contrib.auth.models import Group
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required,user_passes_test
+from django.views.generic.edit import UpdateView
 # Create your views here.
 
+@method_decorator(login_required,name='dispatch')
+class ShowProductView(ListView):
+    model=Product
+    template_name='product/products.html'
+    context_object_name='products'
+    
+    def get_queryset(self):
+        return Product.objects.filter(location=self.request.user.profile.city)
+
+    def get_context_data(self,*args,**kwargs):
+        context=super().get_context_data(*args,**kwargs)
+        context['products_active']='active'
+        context['products_disabled']='disabled'
+        return context
+
 @method_decorator(user_passes_test(lambda u: Group.objects.get(name='seller') in u.groups.all()),name='dispatch')
-class AddProduct(View):
+class AddProductView(View):
     def get(self,request):
         form=ProductForm()
         return render(request,'product/add.html',{'form':form})
@@ -26,17 +42,9 @@ class AddProduct(View):
             new_product.save()
             return redirect('dashboard')
 
-@method_decorator(login_required,name='dispatch')
-class ShowProduct(ListView):
+@method_decorator(user_passes_test(lambda u: Group.objects.get(name='seller') in u.groups.all()),name='dispatch')
+class UpdateProductView(UpdateView):
     model=Product
-    template_name='product/products.html'
-    context_object_name='products'
-    
-    def get_queryset(self):
-        return Product.objects.filter(location=self.request.user.profile.city)
-
-    def get_context_data(self,*args,**kwargs):
-        context=super().get_context_data(*args,**kwargs)
-        context['products_active']='active'
-        context['products_disabled']='disabled'
-        return context
+    form_class=ProductForm
+    template_name='product/edit.html'
+    success_url='/dashboard/'

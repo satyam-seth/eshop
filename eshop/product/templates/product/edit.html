@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Add Product{% endblock title %}
+
+{% block content %}
+<div class="container-fluid bg-warning">
+    <div class="row py-3 px-3">
+        <div class="col-md-10 offset-md-1 border rounded shadow-lg bg-info my-5 py-4">
+            <div class="h1 alert alert-secondary text-center m-3 shadow">Edit Product</div>
+            <form method="POST" class="p-3">
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class="text-center shadow alert alert-warning mb-4 mx-4">{{error}}</p>
+                {% endfor %}
+                {% endif %}
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        {{form.title.label_tag}}
+                        {{form.title}}
+                        <small>{{fm.errors|striptags}}</small>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        {{form.description.label_tag}}
+                        {{form.description}}
+                        <small>{{fm.errors|striptags}}</small>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        {{form.mrp.label_tag}}
+                        {{form.mrp}}
+                        <small>{{fm.errors|striptags}}</small>
+                    </div>
+                    <div class="col-md-6">
+                        {{form.selling_price.label_tag}}
+                        {{form.selling_price}}
+                        <small>{{fm.errors|striptags}}</small>
+                    </div>
+                </div>
+                <div class="text-center mt-3 d-grid">
+                    <button type="submit" class="btn btn-success shadow">Save 
+                        <i class="far fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

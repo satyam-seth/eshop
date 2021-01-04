@@ -17,13 +17,13 @@
     {% if products %}
     <div class="row justify-content-center">
         {% for product in products %}    
-        <div class="card m-2 shadow" style="width: 18rem;">
+        <div class="card m-2 shadow" style="width: 20rem;">
             <div class="card-body">
                 <h5 class="card-title">{{product.title|capfirst}}</h5>
                 <p class="card-text">{{product.description|capfirst}}</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item text-decoration-line-through">M.R.P.: &#8377;{{product.mrp}}/-</li>
+                <li class="list-group-item">M.R.P.: &#8377;<span class="text-decoration-line-through">{{product.mrp}}</span>/-</li>
                 <li class="list-group-item">Price: &#8377;{{product.selling_price}}/-</li>
                 <li class="list-group-item">Seller: {{product.seller.get_full_name|capfirst}}</li>
                 <li class="list-group-item text-muted">Publish Date: {{product.date|date:"d M Y"}}</li>

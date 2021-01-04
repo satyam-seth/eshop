@@ -19,15 +19,15 @@
             <table class="table table-hover table-striped border shadow">
                 <thead>
                     <tr>
-                        <th scope="col">S. No.</th>
-                        <th scope="col">Post Date</th>
-                        <th scope="col" class="d-none d-sm-block">Day</th>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Product Description</th>
-                        <th scope="col">M.R.P.</th>
-                        <th scope="col">Price</th>
-                        <th scope="col" class="d-none d-sm-block">Product ID</th>
-                        <th scope="col">Actions</th>
+                        <th style="width: 6%;" scope="col">S. No.</th>
+                        <th style="width: 9%;" scope="col">Post Date</th>
+                        <th style="width: 3%;" scope="col">Day</th>
+                        <th style="width: 15%;" scope="col">Product Name</th>
+                        <th style="width: 32%;" scope="col">Product Description</th>
+                        <th style="width: 8%;" scope="col">M.R.P.</th>
+                        <th style="width: 8%;" scope="col">Price</th>
+                        <th style="width: 10%;" scope="col">Product ID</th>
+                        <th style="width: 9%;" scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,14 +35,14 @@
                     <tr>
                         <th scope="row">{{forloop.counter }}</th>
                         <td>{{product.date|date:"d M Y"}}</td>
-                        <td class="d-none d-sm-block">{{product.date|date:"D"}}</td>
+                        <td>{{product.date|date:"D"}}</td>
                         <td>{{product.title|capfirst}}</td>
                         <td>{{product.description|capfirst}}</td>
                         <td>{{product.mrp}}</td>
                         <td>{{product.selling_price}}</td>
-                        <td class="d-none d-sm-block">{{product.id}}</td>
+                        <td>{{product.id}}</td>
                         <td>
-                            <a class="btn btn-sm btn-warning shadow-sm" href="#">Edit</a>
+                            <a class="btn btn-sm btn-warning shadow-sm" href="{% url 'edit' product.id %}">Edit</a>
                             <a class="btn btn-sm btn-danger shadow-sm" href="#"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
