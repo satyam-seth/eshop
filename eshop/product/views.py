@@ -69,3 +69,26 @@ class ProductDeleteView(DeleteView):
 @method_decorator(login_required,name='dispatch')
 class BuyView(TemplateView):
     template_name='product/payment.html'
+
+@method_decorator(login_required,name='dispatch')
+class SearchProductListView(ListView):
+    model=Product
+    template_name='product/products.html'
+    context_object_name='products'
+    
+    def get_queryset(self):
+        query=self.request.GET['query']
+        print(self.request.GET)
+        return Product.objects.filter(title__icontains=query)
+
+    def get_context_data(self,*args,**kwargs):
+        context=super().get_context_data(*args,**kwargs)
+        city=Profile.objects.values('city')
+        locations=[]
+        for location in city:
+            if location['city'] != 'NA':
+                locations.append(location['city'])
+        context['locations']=set(locations)
+        context['products_active']='active'
+        context['products_disabled']='disabled'
+        return context
