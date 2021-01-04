@@ -9,7 +9,7 @@ class Product(models.Model):
     date=models.DateField()
     description=models.TextField(max_length=500)
     mrp=models.DecimalField(decimal_places=2,max_digits=7)
-    selling_price=models.DecimalField(decimal_places=2,max_digits=7)
+    selling_price=models.DecimalField(decimal_places=2,max_digits=10)
     location=models.CharField(max_length=50)
 
     def __str__(self):
