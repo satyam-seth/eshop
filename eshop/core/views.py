@@ -10,6 +10,7 @@ from .models import Profile
 from product.models import Product
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib import messages
 
 # Create your views here.
 
