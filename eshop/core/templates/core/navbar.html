@@ -15,28 +15,44 @@
                     <li class="nav-item">
                         <a class="nav-link {{products_active}} {{products_disabled}}" href="{% url 'products' %}">Products</a>
                     </li>
+                    {% if products_active %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Select Location
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for location in locations %}
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'products_by_loc' location %}">{{location|capfirst}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endif %}
                     {% if perms.product.add_product %}
                         <li class="nav-item">
                             <a class="nav-link {{dashboard_active}} {{dashboard_disabled}}" href="{% url 'dashboard' %}">Dashboard</a>
                         </li>
+                        {% if dashboard_active %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Options
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'add' %}">Add Product</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item disabled" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item disabled" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
                     {% endif %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Options
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'add' %}">Add Product</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item disabled" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item disabled" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link {{logout_active}} {{logout_disabled}}" href="{% url 'logout' %}">Logout</a>
                     </li>

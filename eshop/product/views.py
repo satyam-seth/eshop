@@ -4,6 +4,7 @@ from django.views import View
 from django.views.generic import ListView
 from .forms import ProductForm
 from .models import Product
+from core.models import Profile
 from django.contrib.auth.models import Group
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -17,10 +18,20 @@ class ProductListView(ListView):
     context_object_name='products'
     
     def get_queryset(self):
-        return Product.objects.filter(location=self.request.user.profile.city)
+        if self.kwargs:
+            location=self.kwargs['loc']
+        else:
+            location=self.request.user.profile.city
+        return Product.objects.filter(location=location)
 
     def get_context_data(self,*args,**kwargs):
         context=super().get_context_data(*args,**kwargs)
+        city=Profile.objects.values('city')
+        locations=[]
+        for location in city:
+            if location['city'] != 'NA':
+                locations.append(location['city'])
+        context['locations']=set(locations)
         context['products_active']='active'
         context['products_disabled']='disabled'
         return context

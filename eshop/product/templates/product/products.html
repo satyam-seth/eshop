@@ -29,7 +29,13 @@
                 <li class="list-group-item text-muted">Publish Date: {{product.date|date:"d M Y"}}</li>
                 <li class="list-group-item text-muted">Location: {{product.location|capfirst}}</li>
               </ul>
-            <a href="#" class="btn btn-primary m-3">Buy</a>
+            {% if user == product.seller %}
+                <div class="btn btn-secondary m-3">you con't buy your own product</div>
+            {% elif user.profile.city != product.location %}
+                <div class="btn btn-secondary m-3">Unavailable at your location</div>
+            {% else %}
+                <a href="#" class="btn btn-primary m-3">Buy Now</a>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
