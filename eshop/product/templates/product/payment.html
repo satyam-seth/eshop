@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Payment Gateway{% endblock title %}
+
+{% block content %}
+<div class="container-fluid bg-warning py-5" style="height: max-content;">
+    <div class="row py-5">
+        <div class="col-md-4 offset-md-4 py-5 text-center">
+            <h4 class="alert alert-secondary px-5">Redirecting Payment Gateway</h4>
+            <img src="{% static 'core/images/loader.gif' %}" alt="loader">
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.utils.timezone import localtime, now
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView,TemplateView
 from .forms import ProductForm
 from .models import Product
 from core.models import Profile
@@ -65,3 +65,7 @@ class ProductDeleteView(DeleteView):
     model=Product
     template_name='product/delete.html'
     success_url='/dashboard/'
+
+@method_decorator(login_required,name='dispatch')
+class BuyView(TemplateView):
+    template_name='product/payment.html'

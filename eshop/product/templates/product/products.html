@@ -34,7 +34,7 @@
             {% elif user.profile.city != product.location %}
                 <div class="btn btn-secondary m-3">Unavailable at your location</div>
             {% else %}
-                <a href="#" class="btn btn-primary m-3">Buy Now</a>
+                <a href="{% url 'payment' product.id %}" class="btn btn-primary m-3">Buy Now</a>
             {% endif %}
         </div>
         {% endfor %}
