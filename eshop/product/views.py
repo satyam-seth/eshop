@@ -78,8 +78,10 @@ class SearchProductListView(ListView):
     
     def get_queryset(self):
         query=self.request.GET['query']
-        print(self.request.GET)
-        return Product.objects.filter(title__icontains=query)
+        if len(query)>50 or len(query)==0:
+            return Product.objects.none()
+        else:
+            return Product.objects.filter(title__icontains=query)
 
     def get_context_data(self,*args,**kwargs):
         context=super().get_context_data(*args,**kwargs)
