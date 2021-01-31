@@ -4,11 +4,11 @@
 ## Team Members -
 > Name - Satyam Seth </br>
 > Email - [satyam1998.1998@gmail.com](mailto:satyam1998.1998@gmail.com) </br>
-> Responsibilitie - Back-end
+> Responsibility - Back-end
 ##
 >Name- Raj Sahu </br>
 >Email- [rjsahu290@gmail.com](mailto:rjsahu290@gmail.com) </br>
->Responsibilitie - Front-end
+>Responsibility - Front-end
 
 ## Technologies Used -
 - Programming Language - [Python](https://www.python.org/)
