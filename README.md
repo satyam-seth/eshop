@@ -25,3 +25,4 @@
 ### See Project - https://myteamwork.pythonanywhere.com/
 
 ### Demo Video - https://youtu.be/LfjZaDwGfvM
+![Demo GIF](https://github.com/satyam-seth/eshop/blob/main/demo.gif)
